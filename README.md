@@ -86,7 +86,9 @@ docker login
 ## 4. Build & Jalankan Container
 ```bash
 docker build -t img-perpus-username .
-docker run -d   --name perpus-username   --network perpus-net   -p 8000:8000   img-perpus-username
+```
+```
+docker run -d -p 8000:80 --name perpus-username img-perpus-username
 ```
 
 ## 5. Testing
