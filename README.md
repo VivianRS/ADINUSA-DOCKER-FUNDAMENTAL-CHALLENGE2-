@@ -91,6 +91,6 @@ Buka browser dan akses:
 ```
 http://localhost:8000
 ```
-http://<IP_Server>:8000
 ```
+http://<IP_Server>:8000
 
