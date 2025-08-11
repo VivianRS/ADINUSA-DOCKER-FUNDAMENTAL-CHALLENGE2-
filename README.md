@@ -79,14 +79,17 @@ php artisan db:seed --force
 # Start Apache
 apache2-foreground
 ```
-
-## 3. Build & Jalankan Container
+## 3. login docker
+```
+docker login
+```
+## 4. Build & Jalankan Container
 ```bash
 docker build -t img-perpus-username .
 docker run -d   --name perpus-username   --network perpus-net   -p 8000:8000   img-perpus-username
 ```
 
-## 4. Testing
+## 5. Testing
 Buka browser dan akses:
 ```
 http://localhost:8000
