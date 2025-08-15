@@ -88,7 +88,7 @@ docker login
 docker build -t img-perpus-username .
 ```
 ```
-docker run -d -p 8000:80 --username perpus-username img-perpus-username
+docker run -d -p 8000:80 --name perpus-username img-perpus-uername
 ```
 
 ## 5. Testing
