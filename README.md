@@ -15,38 +15,37 @@ Buat file `Dockerfile` dan `start.sh` sesuai isi di bawah ini.
 ```dockerfile
 FROM php:7.2-apache
 
-# Fix repo Debian Buster lama
+
 RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list &&     sed -i 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list &&     echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until
 
-# Enable .htaccess
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
-# Install dependencies
+
 RUN apt-get update && apt-get install -y \
     git unzip curl libzip-dev libpng-dev libonig-dev libxml2-dev zip \
     && docker-php-ext-install pdo pdo_mysql zip
 
-# Enable Apache Rewrite
+
 RUN a2enmod rewrite
 
-# Install Composer
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
+
 WORKDIR /var/www/html
 
-# Copy project files
+
 COPY perpus-laravel/ .
 
-# Ubah DocumentRoot ke public
+
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
-# Copy startup script
+
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
-# Start container
+
 CMD ["/start.sh"]
 ```
 
