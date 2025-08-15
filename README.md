@@ -95,6 +95,7 @@ Buka browser dan akses:
 ```
 http://localhost:8000
 ```
+## IP NODE2
 ```
-http://<IP_Server>:8000
+http://10.10.10.12:8000
 
