@@ -53,29 +53,29 @@ CMD ["/start.sh"]
 ```bash
 #!/bin/bash
 
-# Tunggu MySQL siap
+
 sleep 10
 
-# Set permission
+
 chown -R www-data:www-data /var/www/html
 chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Laravel setup
+
 cp .env.example .env
 composer update
 php artisan key:generate
 
-# Konfigurasi DB
+
 sed -i 's/DB_DATABASE=.*/DB_DATABASE=perpusku_gc/' .env
 sed -i 's/DB_USERNAME=.*/DB_USERNAME=root/' .env
 sed -i 's/DB_PASSWORD=.*/DB_PASSWORD=/' .env
 sed -i 's/127.0.0.1/mysql/' .env
 
-# Migrasi & seeding
+
 php artisan migrate --force
 php artisan db:seed --force
 
-# Start Apache
+
 apache2-foreground
 ```
 ## 3. login docker
